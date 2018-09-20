@@ -1,0 +1,12 @@
+{
+  "name": "@react-mocks/state",
+  "version": "1.0.0",
+  "description": "Mock React component state",
+  "main": "dist/index.js",
+  "repository": "https://github.com/skidding/react-mock",
+  "author": "Ovidiu Cherecheș <hello@ovidiu.ch>",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}

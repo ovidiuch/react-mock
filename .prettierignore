@@ -1,0 +1,4 @@
+coverage
+flow-typed/**
+node_modules
+packages/*/dist
