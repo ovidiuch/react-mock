@@ -6,6 +6,9 @@
   "repository": "https://github.com/skidding/react-mock",
   "author": "Ovidiu Cherecheș <hello@ovidiu.ch>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "lodash": "^4.17.11"
