@@ -3,16 +3,7 @@
 import { isEqual } from 'lodash';
 import { Component, cloneElement } from 'react';
 
-import type { Element } from 'react';
-
-type State = Object;
-
-type ComponentRef = React$Component<any, any>;
-
-type Props = {
-  children: Element<any>,
-  state?: State
-};
+import type { Props, State, ComponentRef } from './index.js.flow';
 
 export class StateMock extends Component<Props> {
   childRef: ?ComponentRef;

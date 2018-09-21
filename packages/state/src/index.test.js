@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Component, createRef } from 'react';
-import { StateMock } from '.';
 import { create } from 'react-test-renderer';
+import { StateMock } from '.';
 
 class Counter extends Component<{}, { count: number }> {
   state = { count: 0 };
