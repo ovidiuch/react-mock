@@ -1,5 +1,5 @@
 {
-  "name": "@react-mocks/state",
+  "name": "@react-mock/state",
   "version": "1.0.0",
   "description": "Mock React component state",
   "main": "dist/index.js",

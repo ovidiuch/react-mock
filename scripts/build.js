@@ -53,7 +53,7 @@ async function build({ pkg, watch }) {
   await clearBuild(pkg);
   await copyFlowDefs(pkg);
 
-  const pkgLabel = `@react-mocks/${bold(pkg)}`;
+  const pkgLabel = `@react-mock/${bold(pkg)}`;
   await run({
     cmd: 'babel',
     args: getBabelCliArgs({ pkg, watch }),
