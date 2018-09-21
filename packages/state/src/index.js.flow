@@ -2,7 +2,7 @@
 
 import type { ComponentType, Element } from 'react';
 
-export type State = Object;
+type State = Object;
 
 export type ComponentRef = React$Component<any, any>;
 

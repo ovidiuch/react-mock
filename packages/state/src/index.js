@@ -3,14 +3,10 @@
 import { isEqual } from 'lodash';
 import { Component, cloneElement } from 'react';
 
-import type { Props, State, ComponentRef } from './index.js.flow';
+import type { Props, ComponentRef } from './index.js.flow';
 
 export class StateMock extends Component<Props> {
   childRef: ?ComponentRef;
-
-  prevState: ?State;
-
-  timeoutId: ?TimeoutID;
 
   render() {
     const { children } = this.props;
