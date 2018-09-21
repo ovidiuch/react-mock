@@ -2,6 +2,7 @@
 
 import { join } from 'path';
 import { readFile, writeFile } from 'fs-extra';
+import { ROOT_PATH } from './shared/paths';
 import { getPackages } from './shared/packages';
 
 const TEMPLATE_PATH = join(__dirname, './templates/.npmignore');
@@ -19,5 +20,5 @@ const TEMPLATE_PATH = join(__dirname, './templates/.npmignore');
 })();
 
 function getTargetPath(pkg) {
-  return join(__dirname, `../packages/${pkg}/.npmignore`);
+  return join(ROOT_PATH, `packages/${pkg}/.npmignore`);
 }
