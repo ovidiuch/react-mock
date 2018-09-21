@@ -1,9 +1,8 @@
 // @flow
 
 import React, { Component, createRef } from 'react';
-import until from 'async-until';
-import { StateMock } from '.';
 import { create } from 'react-test-renderer';
+import { StateMock } from '.';
 
 class Counter extends Component<{}, { count: number }> {
   state = { count: 0 };
@@ -54,6 +53,28 @@ it('sets state on update', () => {
   renderer.update(getElement(10));
 
   expect(renderer.toJSON()).toEqual(`10 times`);
+});
+
+it('preserves ref fn', () => {
+  const ref = jest.fn();
+  create(
+    <StateMock>
+      <Counter ref={ref} />
+    </StateMock>
+  );
+
+  expect(ref).toBeCalledWith(expect.any(Counter));
+});
+
+it('preserves ref obj', () => {
+  const ref = createRef();
+  create(
+    <StateMock>
+      <Counter ref={ref} />
+    </StateMock>
+  );
+
+  expect(ref.current).toEqual(expect.any(Counter));
 });
 
 it('unmounts gracefully', () => {

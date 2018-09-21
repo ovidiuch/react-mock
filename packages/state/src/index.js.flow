@@ -1,0 +1,14 @@
+// @flow
+
+import type { ComponentType, Element } from 'react';
+
+type State = Object;
+
+export type ComponentRef = React$Component<any, any>;
+
+export type Props = {
+  children: Element<any>,
+  state?: State
+};
+
+declare export var StateMock: ComponentType<Props>;

@@ -1,3 +1,5 @@
+const { TEST_GLOBS } = require('./scripts/shared/paths');
+
 module.exports = {
   parser: 'babel-eslint',
   extends: [
@@ -29,12 +31,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: [
-        '.jest/*.js',
-        '**/__mocks__/**/*.js',
-        '**/__tests__/**/*.js',
-        '**/?(*.)test.js'
-      ],
+      files: ['.jest/*.js', ...TEST_GLOBS],
       env: {
         jest: true
       }
@@ -43,6 +40,9 @@ module.exports = {
       files: ['scripts/**/*.js'],
       env: {
         node: true
+      },
+      rules: {
+        'no-console': 0
       }
     }
   ]

@@ -1,32 +1,12 @@
 // @flow
 
 import { isEqual } from 'lodash';
-import React, { Component, cloneElement } from 'react';
+import { Component, cloneElement } from 'react';
 
-import type { Element, ElementRef } from 'react';
-
-type State = Object;
-
-// TODO: How to restrict children to stateful component, or component class at
-// least?
-type ComponentRef = React$Component<{}, {}>;
-
-type Props = {
-  children: Element<any>,
-  state?: State
-  // onChange?: State => mixed
-};
-
-// How often to check the state of the loaded component and update the fixture
-// state if it changed
-const REFRESH_INTERVAL = 200;
+import type { Props, ComponentRef } from './index.js.flow';
 
 export class StateMock extends Component<Props> {
   childRef: ?ComponentRef;
-
-  // prevState: ?State;
-
-  timeoutId: ?TimeoutID;
 
   render() {
     const { children } = this.props;
@@ -44,7 +24,6 @@ export class StateMock extends Component<Props> {
     const { childRef } = this;
     const { state } = this.props;
 
-    // TODO: Use invariant API
     if (!childRef) {
       throw new Error('childRef missing in StateMock.componentDidUpdate');
     }
@@ -57,16 +36,16 @@ export class StateMock extends Component<Props> {
   handleRef = (childRef: ?ComponentRef) => {
     const {
       children: { ref: prevRef }
-      // onChange
     } = this.props;
 
     this.childRef = childRef;
 
-    // Fulfill any previously defined ref from the child element
-    // TODO: Add support for React.createRef?
+    // Fulfill any previously defined ref on the child element
     // https://reactjs.org/docs/refs-and-the-dom.html#creating-refs
     if (typeof prevRef === 'function') {
       prevRef(childRef);
+    } else if (prevRef && 'current' in prevRef) {
+      prevRef.current = childRef;
     }
 
     // Nothing to do on the unmount branch (when refs are set to NULL)
@@ -77,41 +56,7 @@ export class StateMock extends Component<Props> {
     if (this.props.state) {
       replaceState(childRef, this.props.state);
     }
-
-    // // XXX: Maybe should wait for replaceState to finish?
-    // this.prevState = childRef.state;
-    //
-    // if (typeof onChange === 'function') {
-    //   this.scheduleStateCheck();
-    // }
   };
-
-  // scheduleStateCheck = () => {
-  //   // Is there a better way to listen to component state changes?
-  //   this.timeoutId = setTimeout(this.checkState, REFRESH_INTERVAL);
-  // };
-  //
-  // checkState = () => {
-  //   const { childRef } = this;
-  //   const { onChange } = this.props;
-  //
-  //   // TODO: Use invariant API
-  //   if (!childRef) {
-  //     throw new Error('childRef missing in StateMock.checkState');
-  //   }
-  //
-  //   // TODO: Use invariant API
-  //   if (typeof onChange !== 'function') {
-  //     throw new Error('onChange missing in StateMock.checkState');
-  //   }
-  //
-  //   const { state } = childRef;
-  //   if (!isEqual(state, this.prevState)) {
-  //     onChange(state);
-  //   }
-  //
-  //   this.scheduleStateCheck();
-  // };
 }
 
 function replaceState(childRef, state) {
