@@ -5,6 +5,8 @@ import { Component, cloneElement } from 'react';
 
 import type { Props, ComponentRef } from './index.js.flow';
 
+// NOTE: StateMock expects component.state to be an object. Can React component
+// state be of a different type (eg. number of string)?
 export class StateMock extends Component<Props> {
   static cosmosCaptureProps = false;
   static cosmosCaptureState = false;
@@ -17,7 +19,7 @@ export class StateMock extends Component<Props> {
     // Flow users will get a static error when trying to wrap more elements with
     // StateMock. Others might bypass this limitation and find out at run time.
     if (Array.isArray(children)) {
-      throw new Error('ComponentState only accepts a single child element');
+      throw new Error('StateMock only accepts a single child element');
     }
 
     return cloneElement(children, { ref: this.handleRef });
