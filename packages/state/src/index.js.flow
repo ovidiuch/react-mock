@@ -2,9 +2,9 @@
 
 import type { ComponentType, Element } from 'react';
 
-type State = Object;
+export type State = Object;
 
-export type ComponentRef = React$Component<any, any>;
+export type ComponentRef = React$Component<{}, State>;
 
 export type Props = {
   children: Element<any>,
