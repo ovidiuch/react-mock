@@ -3,6 +3,7 @@
 import { isEqual } from 'lodash';
 import { Component, cloneElement } from 'react';
 
+import type { Ref } from 'react';
 import type { Props, ComponentRef } from './index.js.flow';
 
 // NOTE: StateMock expects component.state to be an object. Can React component
@@ -39,39 +40,37 @@ export class StateMock extends Component<Props> {
   }
 
   handleRef = (childRef: ?ComponentRef) => {
-    const {
-      children: { ref: prevRef }
-    } = this.props;
+    const prevRef: ?Ref<any> = this.props.children.ref;
 
     this.childRef = childRef;
 
-    // Fulfill any previously defined ref on the child element
-    // https://reactjs.org/docs/refs-and-the-dom.html#creating-refs
-    if (typeof prevRef === 'function') {
-      prevRef(childRef);
-    } else if (prevRef && 'current' in prevRef) {
-      prevRef.current = childRef;
-    }
-
-    // Nothing to do on the unmount branch (when refs are set to NULL)
     if (!childRef) {
+      handleRef(prevRef, childRef);
+
+      // Nothing else to do on the unmount branch (when refs are set to NULL)
       return;
     }
 
     if (this.props.state) {
-      replaceState(childRef, this.props.state);
+      // Wait until state has been set to call prev ref. This will give the
+      // impression that the mocked state is the initial state.
+      replaceState(childRef, this.props.state, () => {
+        handleRef(prevRef, childRef);
+      });
+    } else {
+      handleRef(prevRef, childRef);
     }
   };
 }
 
-function replaceState(childRef, state) {
+function replaceState(childRef, state, cb) {
   // We need to unset existing state keys because React doesn't provide a
   // replaceState method (anymore)
   // https://reactjs.org/docs/react-component.html#setstate
   const nextState = resetOriginalKeys(childRef.state, state);
 
   if (!isEqual(nextState, childRef.state)) {
-    childRef.setState(nextState);
+    childRef.setState(nextState, cb);
   }
 }
 
@@ -85,4 +84,17 @@ function resetOriginalKeys(original, current) {
         : result,
     current
   );
+}
+
+function handleRef(ref: ?Ref<any>, elRef: ?ComponentRef) {
+  if (typeof ref === 'string') {
+    throw new Error('StateMock does not support string refs');
+  }
+
+  // https://reactjs.org/docs/refs-and-the-dom.html#creating-refs
+  if (typeof ref === 'function') {
+    ref(elRef);
+  } else if (ref && typeof ref === 'object') {
+    ref.current = elRef;
+  }
 }

@@ -88,3 +88,20 @@ it('unmounts gracefully', () => {
     renderer.unmount();
   }).not.toThrow();
 });
+
+it('sets state before calling ref', async () => {
+  const state = await new Promise(res => {
+    create(
+      <StateMock state={{ count: 5 }}>
+        <Counter
+          ref={elRef => {
+            if (elRef) {
+              res(elRef.state);
+            }
+          }}
+        />
+      </StateMock>
+    );
+  });
+  expect(state).toEqual({ count: 5 });
+});
