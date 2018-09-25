@@ -6,6 +6,9 @@ import { Component, cloneElement } from 'react';
 import type { Props, ComponentRef } from './index.js.flow';
 
 export class StateMock extends Component<Props> {
+  static cosmosCaptureProps = false;
+  static cosmosCaptureState = false;
+
   childRef: ?ComponentRef;
 
   render() {
