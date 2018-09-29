@@ -6,8 +6,9 @@ import { Component, cloneElement } from 'react';
 import type { Ref } from 'react';
 import type { Props, ComponentRef } from './index.js.flow';
 
-// NOTE: StateMock expects component.state to be an object. Can React component
-// state be of a different type (eg. number of string)?
+// `state` prop must be an object, as does React component state.
+// "The state is user-defined, and it should be a plain JavaScript object."
+// https://reactjs.org/docs/react-component.html#state
 export class StateMock extends Component<Props> {
   static cosmosCapture = false;
 
