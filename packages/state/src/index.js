@@ -9,8 +9,7 @@ import type { Props, ComponentRef } from './index.js.flow';
 // NOTE: StateMock expects component.state to be an object. Can React component
 // state be of a different type (eg. number of string)?
 export class StateMock extends Component<Props> {
-  static cosmosCaptureProps = false;
-  static cosmosCaptureState = false;
+  static cosmosCapture = false;
 
   childRef: ?ComponentRef;
 
