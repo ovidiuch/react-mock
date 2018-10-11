@@ -6,8 +6,6 @@ import type { Props } from './index.js.flow';
 
 export class MyPackageMock extends Component<Props> {
   render() {
-    const { children } = this.props;
-
-    return children;
+    return this.props.children;
   }
 }

@@ -3,7 +3,11 @@
 import type { ComponentType, Element } from 'react';
 
 export type Props = {
-  children: Element<any>
+  children: Element<any>,
+  // See http://www.wheresrhys.co.uk/fetch-mock/#api-mockingmock
+  matcher: string | RegExp | ((url: string, options: Object) => boolean),
+  response: any,
+  options?: {}
 };
 
 declare export var FetchMock: ComponentType<Props>;
