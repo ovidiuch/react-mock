@@ -26,7 +26,8 @@ export class FetchMock extends Component<Props> {
 
   mock() {
     // Clear mocks from a previous FetchMock instance
-    // Warning: A page can only have one FetchProxy instance at the same time
+    // Warning: The last rendered FetchProxy instance will override mocks from
+    // previous ones
     this.unmock();
 
     const { matcher, response, options } = this.props;
