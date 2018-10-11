@@ -31,7 +31,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.jest/*.js', ...TEST_GLOBS, 'scripts/templates/tests.js'],
+      files: ['.jest/*.js', ...TEST_GLOBS],
       env: {
         jest: true
       }

@@ -1,0 +1,9 @@
+// @flow
+
+import type { ComponentType, Element } from 'react';
+
+export type Props = {
+  children: Element<any>
+};
+
+declare export var MyPackageMock: ComponentType<Props>;
