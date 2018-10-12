@@ -15,17 +15,11 @@ class MyComponent extends Component<
   };
 
   async componentDidMount() {
-    try {
-      const response = await fetch('/create', { method: 'POST' });
+    const response = await fetch('/create', { method: 'POST' });
 
-      this.setState({
-        status: response.status === 200 ? 'success' : 'error'
-      });
-    } catch (err) {
-      this.setState({
-        status: 'error'
-      });
-    }
+    this.setState({
+      status: response.status === 200 ? 'success' : 'error'
+    });
   }
 
   render() {
