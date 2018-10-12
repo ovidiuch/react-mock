@@ -19,7 +19,7 @@ class MyComponent extends Component<{}> {
   }
 }
 
-it('mocks POST 200 response', async () => {
+it('matches POST body', async () => {
   create(
     <FetchMock options={{ matcher: '/login', response: 200, method: 'POST' }}>
       <MyComponent />
