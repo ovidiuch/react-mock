@@ -1,7 +1,7 @@
 {
   "name": "@react-mock/state",
   "version": "0.1.4",
-  "description": "Mock React component state",
+  "description": "Inject React component state declaratively",
   "main": "dist/index.js",
   "repository": "https://github.com/skidding/react-mock",
   "author": "Ovidiu Cherecheș <hello@ovidiu.ch>",

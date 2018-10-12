@@ -1,7 +1,7 @@
 {
   "name": "@react-mock/fetch",
   "version": "0.2.0",
-  "description": "Mock Fetch requests",
+  "description": "Mock Fetch requests declaratively",
   "main": "dist/index.js",
   "repository": "https://github.com/skidding/react-mock",
   "author": "Ovidiu Cherecheș <hello@ovidiu.ch>",
