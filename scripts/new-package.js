@@ -1,18 +1,16 @@
 // @flow
 
 import { join } from 'path';
-import { capitalize, camelCase } from 'lodash';
+import { startCase } from 'lodash';
 import { readFile, outputFile, pathExists } from 'fs-extra';
 import inquirer from 'inquirer';
 import { ROOT_PATH } from './shared/paths';
 import { done, error, bold } from './shared/print';
+import { glob } from './shared/glob';
+
+const TEMPLATE_PATH = join(__dirname, './templates/new-package');
 
 (async () => {
-  const pkgJson = await getTemplate('package.json');
-  const indexTemplate = await getTemplate('new-package/index.js');
-  const flowTemplate = await getTemplate('new-package/index.js.flow');
-  const testTemplate = await getTemplate('new-package/index.test.js');
-
   const { pkgName } = await inquirer.prompt([
     {
       type: 'input',
@@ -27,33 +25,39 @@ import { done, error, bold } from './shared/print';
     return;
   }
 
-  const { pkgDescription } = await inquirer.prompt([
+  const { pkgDesc, compName } = await inquirer.prompt([
     {
       type: 'input',
-      name: 'pkgDescription',
+      name: 'pkgDesc',
       message: `What's the package description?`
+    },
+    {
+      type: 'input',
+      name: 'compName',
+      message: `What's the component name?`
     }
   ]);
 
-  await createFile(
-    pkgName,
-    'package.json',
-    genPackageJson(pkgJson, { pkgName, pkgDescription })
-  );
-  await createFile(
-    pkgName,
-    'src/index.js',
-    genSourceFile(indexTemplate, { pkgName })
-  );
-  await createFile(
-    pkgName,
-    'src/index.js.flow',
-    genSourceFile(flowTemplate, { pkgName })
-  );
-  await createFile(
-    pkgName,
-    'src/index.test.js',
-    genSourceFile(testTemplate, { pkgName })
+  const pkgTitle = startCase(pkgName);
+
+  const templateFiles = await glob('**/*', { cwd: TEMPLATE_PATH, nodir: true });
+  await Promise.all(
+    templateFiles.map(async relPath => {
+      const templatePath = getTemplatePath(relPath);
+      const pkgPath = getPackagePath(pkgName, relPath);
+
+      const template = await readFile(templatePath, 'utf8');
+      await outputFile(
+        pkgPath,
+        replaceTemplateVars(template, {
+          pkgName,
+          pkgDesc,
+          pkgTitle,
+          compName
+        }),
+        'utf8'
+      );
+    })
   );
 
   console.error(done(`${bold(pkgName)} package created!`));
@@ -63,27 +67,17 @@ function getPackagePath(pkgName, relPath = '') {
   return join(ROOT_PATH, `packages/${pkgName}`, relPath);
 }
 
-function getTemplatePath(template) {
-  return join(__dirname, `templates`, template);
+function getTemplatePath(relPath) {
+  return join(TEMPLATE_PATH, relPath);
 }
 
-async function getTemplate(path) {
-  return readFile(getTemplatePath(path), 'utf8');
-}
-
-async function createFile(pkgName, relPath, contents) {
-  return outputFile(getPackagePath(pkgName, relPath), contents, 'utf8');
-}
-
-function genPackageJson(template, { pkgName, pkgDescription }) {
+function replaceTemplateVars(
+  template,
+  { pkgName, pkgDesc, pkgTitle, compName }
+) {
   return template
-    .replace('$PACKAGE_NAME', pkgName)
-    .replace('$PACKAGE_DESC', pkgDescription);
-}
-
-function genSourceFile(template, { pkgName }) {
-  return template.replace(
-    /MyPackageMock/g,
-    `${capitalize(camelCase(pkgName))}Mock`
-  );
+    .replace(/\$PACKAGE_NAME/g, pkgName)
+    .replace(/\$PACKAGE_DESC/g, pkgDesc)
+    .replace(/\$PACKAGE_TITLE/g, pkgTitle)
+    .replace(/\$COMPONENT_NAME/g, compName);
 }

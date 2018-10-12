@@ -6,4 +6,4 @@ export type Props = {
   children: Element<any>
 };
 
-declare export var MyPackageMock: ComponentType<Props>;
+declare export var $COMPONENT_NAME: ComponentType<Props>;

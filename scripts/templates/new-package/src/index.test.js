@@ -2,15 +2,15 @@
 
 import React from 'react';
 import { create } from 'react-test-renderer';
-import { MyPackageMock } from '.';
+import { $COMPONENT_NAME } from '.';
 
 const MyComponent = () => 'Hello world!';
 
 it('renders children', () => {
   const renderer = create(
-    <MyPackageMock>
+    <$COMPONENT_NAME>
       <MyComponent />
-    </MyPackageMock>
+    </$COMPONENT_NAME>
   );
 
   expect(renderer.toJSON()).toEqual(`Hello world!`);
