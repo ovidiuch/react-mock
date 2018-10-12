@@ -1,6 +1,6 @@
 {
   "name": "@react-mock/$PACKAGE_NAME",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "$PACKAGE_DESC",
   "main": "dist/index.js",
   "repository": "https://github.com/skidding/react-mock",
