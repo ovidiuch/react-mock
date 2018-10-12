@@ -2,7 +2,7 @@
 
 A declarative wrapper for the wonderful [fetch-mock](http://www.wheresrhys.co.uk/fetch-mock/).
 
-> **Note:** This wrapper mocks the global Fetch API, so only one FetchMock instance should be rendered at once.
+> **Note:** FetchMock mocks the global Fetch API, so only one FetchMock instance should be rendered at once.
 
 ```js
 import { FetchMock } from '@react-mock/fetch';

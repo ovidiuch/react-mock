@@ -8,6 +8,7 @@ Declarative mocks for React state and global APIs.
 
 - [Component state](#component-state)
 - [Fetch requests](#fetch-requests)
+- [LocalStorage](#local-storage)
 - **[How to contribute](#how-to-contribute)**
 
 ## Component state
@@ -28,7 +29,7 @@ render(
 
 A declarative wrapper for the wonderful [fetch-mock](http://www.wheresrhys.co.uk/fetch-mock/).
 
-> **Note:** This wrapper mocks the global Fetch API, so only one FetchMock instance should be rendered at once.
+> **Note:** FetchMock mocks the global Fetch API, so only one FetchMock instance should be rendered at once.
 
 ```js
 import { FetchMock } from '@react-mock/fetch';
@@ -61,6 +62,22 @@ import { fetchMock } from '@react-mock/fetch';
 
 const [, { body }] = fetchMock.lastCall('/login', 'POST');
 expect(JSON.parse(body)).toEqual({ user: 'harry' });
+```
+
+## LocalStorage
+
+Mock LocalStorage data declaratively.
+
+> **Note:** LocalStorageMock mocks the global localStorage API, so only one LocalStorageMock instance should be rendered at once.
+
+```js
+import { LocalStorageMock } from '@react-mock/localstorage';
+
+render(
+  <LocalStorageMock items={{ sessionId: 're4lt0k3n' }}>
+    <MyComponent />
+  </LocalStorageMock>
+);
 ```
 
 ## How to contribute

@@ -1,0 +1,10 @@
+// @flow
+
+import type { ComponentType, Element } from 'react';
+
+export type Props = {
+  children: Element<any>,
+  items: { [string]: mixed }
+};
+
+declare export var LocalStorageMock: ComponentType<Props>;

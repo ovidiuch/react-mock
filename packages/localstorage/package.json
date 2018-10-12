@@ -1,7 +1,7 @@
 {
-  "name": "@react-mock/$PACKAGE_NAME",
+  "name": "@react-mock/localstorage",
   "version": "0.0.0",
-  "description": "$PACKAGE_DESC",
+  "description": "Mock LocalStorage data declaratively",
   "main": "dist/index.js",
   "repository": "https://github.com/skidding/react-mock",
   "author": "Ovidiu Cherecheș <hello@ovidiu.ch>",
