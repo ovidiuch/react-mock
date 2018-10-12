@@ -10,10 +10,10 @@
     "test": "jest --config .jest/config.js",
     "test:watch": "yarn test --watch",
     "build": "yarn babel-node ./scripts/build.js",
-    "copy-npmignore": "yarn babel-node ./scripts/copy-npmignore.js",
-    "new-package": "yarn babel-node ./scripts/new-package.js && yarn copy-npmignore",
+    "new-package": "yarn babel-node ./scripts/new-package.js",
+    "generate-readme": "yarn babel-node ./scripts/generate-readme.js",
     "release:check": "yarn flow && yarn lint && yarn test",
-    "release:prepare": "yarn copy-npmignore && yarn build",
+    "release:prepare": "yarn generate-readme && yarn build",
     "release:lerna": "lerna publish --registry=https://registry.npmjs.org/",
     "release": "yarn release:check && yarn release:prepare && yarn release:lerna"
   },
