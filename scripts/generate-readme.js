@@ -34,10 +34,10 @@ async function readPackageReadme(pkg) {
 }
 
 async function writeMainReadme({ pkgReadmes }) {
-  // Ensure `state` is first
+  // Ensure `state` is first and sort the rest alphabetically
   const pkgNames = sortBy(
     Object.keys(pkgReadmes),
-    p => (p === 'state' ? -1 : 1)
+    p => (p === 'state' ? '' : p)
   );
 
   let packageSections = [];
