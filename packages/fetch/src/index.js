@@ -5,6 +5,8 @@ import fetchMock from 'fetch-mock';
 
 import type { Props } from './index.js.flow';
 
+// TODO: export fetchMock
+// TODO: Document how to assert on fetchMock calls
 export class FetchMock extends Component<Props> {
   constructor(props: Props) {
     super(props);
@@ -30,7 +32,7 @@ export class FetchMock extends Component<Props> {
     // the previous ones
     this.unmock();
 
-    const { matcher, response, options, config } = this.props;
+    const { options, config } = this.props;
 
     if (config) {
       Object.keys(config).forEach(key => {
@@ -38,7 +40,11 @@ export class FetchMock extends Component<Props> {
       });
     }
 
-    fetchMock.mock(matcher, response, options);
+    if (this.props.matcher && this.props.response) {
+      fetchMock.mock(this.props.matcher, this.props.response, options);
+    } else {
+      fetchMock.mock(options);
+    }
 
     fetchMock.__fetchMockInst = this;
   }
