@@ -1,7 +1,7 @@
 // @flow
 
 import { join } from 'path';
-import { readFile, writeFile } from 'fs-extra';
+import { readFile, writeFile, pathExists } from 'fs-extra';
 import { ROOT_PATH } from './shared/paths';
 import { getPackages } from './shared/packages';
 
@@ -14,7 +14,10 @@ const TEMPLATE_PATH = join(__dirname, './templates/.npmignore');
   await Promise.all(
     packages.map(async pkg => {
       const targetPath = getTargetPath(pkg);
-      await writeFile(targetPath, template, 'utf8');
+
+      if (!(await pathExists(targetPath))) {
+        await writeFile(targetPath, template, 'utf8');
+      }
     })
   );
 })();
