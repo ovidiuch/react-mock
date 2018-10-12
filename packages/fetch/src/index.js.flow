@@ -2,12 +2,13 @@
 
 import type { ComponentType, Element } from 'react';
 
+// See http://www.wheresrhys.co.uk/fetch-mock/#api-mockingmock
+
 type FetchMatcher =
   | string
   | RegExp
   | ((url: string, options: Object) => boolean);
 
-// See http://www.wheresrhys.co.uk/fetch-mock/#api-mockingmock
 type FetchResponse = any;
 
 export type Props =
@@ -28,3 +29,5 @@ export type Props =
     };
 
 declare export var FetchMock: ComponentType<Props>;
+
+declare export var fetchMock: Function;
