@@ -7,7 +7,8 @@ export type Props = {
   // See http://www.wheresrhys.co.uk/fetch-mock/#api-mockingmock
   matcher: string | RegExp | ((url: string, options: Object) => boolean),
   response: any,
-  options?: {}
+  options?: {},
+  config?: {}
 };
 
 declare export var FetchMock: ComponentType<Props>;

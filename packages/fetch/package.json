@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
+    "fetch-mock": "^7.0.7",
     "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "node-fetch": "^2.2.0"
   }
 }

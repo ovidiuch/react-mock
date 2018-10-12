@@ -19,28 +19,34 @@ export class FetchMock extends Component<Props> {
   componentWillUnmount() {
     // Make sure we don't clear a mock from a newer instance (since React 16
     // B.constructor is called before A.componentWillUnmount)
-    if (fetchMock.__prevProxy === this) {
+    if (fetchMock.__fetchMockInst === this) {
       this.unmock();
     }
   }
 
   mock() {
     // Clear mocks from a previous FetchMock instance
-    // Warning: The last rendered FetchProxy instance will override mocks from
-    // previous ones
+    // NOTE: The last rendered FetchProxy instance will override mocks from
+    // the previous ones
     this.unmock();
 
-    const { matcher, response, options } = this.props;
+    const { matcher, response, options, config } = this.props;
+
+    if (config) {
+      Object.keys(config).forEach(key => {
+        fetchMock.config[key] = config[key];
+      });
+    }
+
     fetchMock.mock(matcher, response, options);
 
-    // Allow unmocked requests to fall through
-    fetchMock.catch((...args) => fetchMock.realFetch.apply(global, args));
-
-    fetchMock.__prevProxy = this;
+    fetchMock.__fetchMockInst = this;
   }
 
   unmock() {
-    fetchMock.reset();
-    delete fetchMock.__prevProxy;
+    if (typeof fetchMock.restore === 'function') {
+      fetchMock.restore();
+      delete fetchMock.__fetchMockInst;
+    }
   }
 }

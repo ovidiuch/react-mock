@@ -31,8 +31,20 @@ A declarative wrapper for the wonderful [fetch-mock](http://www.wheresrhys.co.uk
 ```js
 import { FetchMock } from '@react-mock/fetch';
 
+// Passing fetch-mock options
 render(
   <FetchMock matcher="/login" response={401} options={{ method: 'POST' }}>
+    <MyComponent />
+  </FetchMock>
+);
+
+// Passing fetch-mock config
+render(
+  <FetchMock
+    matcher="/posts"
+    response={200}
+    config={{ fallbackToNetwork: true }}
+  >
     <MyComponent />
   </FetchMock>
 );
