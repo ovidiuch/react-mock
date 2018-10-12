@@ -35,7 +35,7 @@ import { FetchMock } from '@react-mock/fetch';
 
 // Passing fetch-mock options
 render(
-  <FetchMock matcher="/login" response={401} options={{ method: 'POST' }}>
+  <FetchMock options={{ matcher: '/login', response: 401, method: 'POST' }}>
     <MyComponent />
   </FetchMock>
 );

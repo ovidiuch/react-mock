@@ -2,13 +2,29 @@
 
 import type { ComponentType, Element } from 'react';
 
-export type Props = {
-  children: Element<any>,
-  // See http://www.wheresrhys.co.uk/fetch-mock/#api-mockingmock
-  matcher: string | RegExp | ((url: string, options: Object) => boolean),
-  response: any,
-  options?: {},
-  config?: {}
-};
+type FetchMatcher =
+  | string
+  | RegExp
+  | ((url: string, options: Object) => boolean);
+
+// See http://www.wheresrhys.co.uk/fetch-mock/#api-mockingmock
+type FetchResponse = any;
+
+export type Props =
+  | {
+      children: Element<any>,
+      matcher: FetchMatcher,
+      response: FetchResponse,
+      options?: {},
+      config?: {}
+    }
+  | {
+      children: Element<any>,
+      options: {
+        matcher: FetchMatcher,
+        response: FetchResponse
+      },
+      config?: {}
+    };
 
 declare export var FetchMock: ComponentType<Props>;
