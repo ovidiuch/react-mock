@@ -5,8 +5,9 @@ import fetchMock from 'fetch-mock';
 
 import type { Props } from './index.js.flow';
 
-// TODO: export fetchMock
-// TODO: Document how to assert on fetchMock calls
+// Allow consumers to run assertions on the same instance of fetchMock
+export { default as fetchMock } from 'fetch-mock';
+
 export class FetchMock extends Component<Props> {
   constructor(props: Props) {
     super(props);
