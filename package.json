@@ -6,8 +6,8 @@
   ],
   "scripts": {
     "lint": "eslint '**/*.js' --quiet",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "jest --config .jest/config.js",
+    "test:watch": "yarn test --watch",
     "build": "yarn babel-node ./scripts/build.js",
     "copy-npmignore": "yarn babel-node ./scripts/copy-npmignore.js",
     "new-package": "yarn babel-node ./scripts/new-package.js && yarn copy-npmignore",
