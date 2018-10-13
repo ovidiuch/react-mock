@@ -43,7 +43,11 @@ const TEMPLATE_PATH = join(__dirname, './templates/new-package');
 
   const pkgTitle = startCase(pkgName);
 
-  const templateFiles = await glob('**/*', { cwd: TEMPLATE_PATH, nodir: true });
+  const templateFiles = await glob('**/*', {
+    cwd: TEMPLATE_PATH,
+    nodir: true,
+    dot: true
+  });
   await Promise.all(
     templateFiles.map(async relPath => {
       const templatePath = getTemplatePath(relPath);
