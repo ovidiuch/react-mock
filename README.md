@@ -8,7 +8,7 @@ Declarative mocks for React state and global APIs.
 
 - [Component state](#component-state)
 - [Fetch requests](#fetch-requests)
-- [LocalStorage](#local-storage)
+- [LocalStorage](#localstorage)
 - [XHR requests](#xhr-requests)
 - **[How to contribute](#how-to-contribute)**
 

@@ -59,5 +59,5 @@ async function writeMainReadme({ pkgReadmes }) {
 function getLinkFromPkgReadme(pkgReadme) {
   const title = pkgReadme.split(`\n`)[0].replace(/^#+ (.+)$/, '$1');
 
-  return `[${title}](#${kebabCase(title)})`;
+  return `[${title}](#${title.toLowerCase().replace(/\s+/g, '-')})`;
 }
