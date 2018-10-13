@@ -1,7 +1,7 @@
 // @flow
 
 import { join } from 'path';
-import { kebabCase, sortBy } from 'lodash';
+import { sortBy } from 'lodash';
 import { readFile, writeFile } from 'fs-extra';
 import { ROOT_PATH } from './shared/paths';
 import { getPackages } from './shared/packages';
