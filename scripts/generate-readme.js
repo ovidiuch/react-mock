@@ -1,7 +1,7 @@
 // @flow
 
 import { join } from 'path';
-import { kebabCase, sortBy } from 'lodash';
+import { sortBy } from 'lodash';
 import { readFile, writeFile } from 'fs-extra';
 import { ROOT_PATH } from './shared/paths';
 import { getPackages } from './shared/packages';
@@ -59,5 +59,5 @@ async function writeMainReadme({ pkgReadmes }) {
 function getLinkFromPkgReadme(pkgReadme) {
   const title = pkgReadme.split(`\n`)[0].replace(/^#+ (.+)$/, '$1');
 
-  return `[${title}](#${kebabCase(title)})`;
+  return `[${title}](#${title.toLowerCase().replace(/\s+/g, '-')})`;
 }
