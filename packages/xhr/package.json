@@ -1,6 +1,6 @@
 {
   "name": "@react-mock/xhr",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Mock XHR requests declaratively",
   "main": "dist/index.js",
   "repository": "https://github.com/skidding/react-mock",
@@ -13,6 +13,5 @@
     "@babel/runtime": "^7.0.0",
     "lodash": "^4.17.11",
     "xhr-mock": "^2.4.1"
-  },
-  "devDependencies": {}
+  }
 }
