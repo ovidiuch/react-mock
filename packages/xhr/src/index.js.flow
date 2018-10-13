@@ -1,0 +1,13 @@
+// @flow
+
+import type { ComponentType, Element } from 'react';
+
+export type Props = {
+  children: Element<any>,
+  // For options see https://github.com/jameslnewell/xhr-mock/tree/master/packages/xhr-mock#usage
+  url: string,
+  method?: string,
+  response: Function
+};
+
+declare export var XhrMock: ComponentType<Props>;
