@@ -50,7 +50,7 @@ async function writeMainReadme({ pkgReadmes }) {
 
   const template = await readFile(TEMPLATE_PATH, 'utf8');
   const output = template
-    .replace(/\$PACKAGE_LINKS\n/g, packageLinks.map(l => `- ${l}`).join(`\n`))
+    .replace(/- \$PACKAGE_LINKS/g, packageLinks.map(l => `- ${l}`).join(`\n`))
     .replace(/\$PACKAGE_SECTIONS\n/g, packageSections.join(`\n`));
 
   await writeFile(OUTPUT_PATH, output, 'utf8');
