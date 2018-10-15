@@ -2,12 +2,25 @@
 
 import type { ComponentType, Element } from 'react';
 
-export type Props = {
-  children: Element<any>,
-  // For options see https://github.com/jameslnewell/xhr-mock/tree/master/packages/xhr-mock#usage
+// For all options see
+// https://github.com/jameslnewell/xhr-mock/tree/master/packages/xhr-mock#usage
+
+type MockOptions = {|
   url: string,
   method?: string,
   response: Function
-};
+|};
+
+type SingleProps = {|
+  children: Element<any>,
+  ...MockOptions
+|};
+
+type MultiProps = {|
+  children: Element<any>,
+  mocks: MockOptions[]
+|};
+
+export type Props = SingleProps | MultiProps;
 
 declare export var XhrMock: ComponentType<Props>;

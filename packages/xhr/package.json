@@ -10,7 +10,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0",
+    "@babel/runtime": "^7.1.2",
     "lodash": "^4.17.11",
     "xhr-mock": "^2.4.1"
   }

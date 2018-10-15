@@ -24,7 +24,7 @@ Tools like [fetch-mock](http://www.wheresrhys.co.uk/fetch-mock/) and [xhr-mock](
 
 2. They're difficult to integrate in component explorers where a usage file is a declarative component element.
 
-To overcome these drawbacks, `react-mock` offers mocking techniques as declarative [React elements](https://reactjs.org/docs/rendering-elements.html).
+To overcome these drawbacks, `react-mock` offers mocking techniques as declarative [React elements](https://reactjs.org/docs/rendering-elements.html). Lifecycle methods take care of setting up and reverting mocks behind the hood.
 
 ### Limitations
 

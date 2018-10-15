@@ -26,9 +26,26 @@ render(
 );
 ```
 
-Check how fetch was called using fetch-mock's [inspection methods](http://www.wheresrhys.co.uk/fetch-mock/#api-inspectionfiltering).
+### Multiple mocks
 
-> **Note:** Import _fetchMock_ from `@react-mock/fetch` to ensure you're inspecting on the right fetch-mock instance.
+```js
+render(
+  <FetchMock
+    mocks={[
+      { matcher: '/users', response: [{ id: 123 }] },
+      { matcher: '/user/123', response: { name: 'Jessica' } }
+    ]}
+  >
+    <MyComponent />
+  </FetchMock>
+);
+```
+
+### Inspection
+
+See fetch-mock's [inspection methods](http://www.wheresrhys.co.uk/fetch-mock/#api-inspectionfiltering) to check how fetch was called.
+
+> **Note:** Import `fetchMock` from @react-mock/fetch to ensure you're inspecting on the right fetch-mock instance.
 
 ```js
 import { fetchMock } from '@react-mock/fetch';

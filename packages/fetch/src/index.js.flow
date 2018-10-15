@@ -2,7 +2,8 @@
 
 import type { ComponentType, Element } from 'react';
 
-// See http://www.wheresrhys.co.uk/fetch-mock/#api-mockingmock
+// For all fetch-mock options see
+// http://www.wheresrhys.co.uk/fetch-mock/#api-mockingmock
 
 type FetchMatcher =
   | string
@@ -11,22 +12,34 @@ type FetchMatcher =
 
 type FetchResponse = any;
 
-export type Props =
-  | {
-      children: Element<any>,
-      matcher: FetchMatcher,
-      response: FetchResponse,
-      options?: {},
-      config?: {}
-    }
-  | {
-      children: Element<any>,
-      options: {
-        matcher: FetchMatcher,
-        response: FetchResponse
-      },
-      config?: {}
-    };
+type RequiredOptions = {
+  matcher: FetchMatcher,
+  response: FetchResponse
+};
+
+type SharedProps = {|
+  children: Element<any>,
+  config?: {}
+|};
+
+type SingleShorthandProps = {|
+  ...SharedProps,
+  matcher: FetchMatcher,
+  response: FetchResponse,
+  options?: {}
+|};
+
+type SingleExplicitProps = {|
+  ...SharedProps,
+  options: RequiredOptions
+|};
+
+type MultiMockProps = {|
+  ...SharedProps,
+  mocks: RequiredOptions[]
+|};
+
+export type Props = SingleShorthandProps | SingleExplicitProps | MultiMockProps;
 
 declare export var FetchMock: ComponentType<Props>;
 
