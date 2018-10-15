@@ -7,6 +7,7 @@ import { ROOT_PATH } from './shared/paths';
 import { getPackages } from './shared/packages';
 
 const TEMPLATE_PATH = join(__dirname, './templates/README.md');
+const CONTRIBUTING_PATH = join(__dirname, '../CONTRIBUTING.md');
 const OUTPUT_PATH = join(__dirname, '../README.md');
 
 (async () => {
@@ -49,9 +50,11 @@ async function writeMainReadme({ pkgReadmes }) {
   });
 
   const template = await readFile(TEMPLATE_PATH, 'utf8');
+  const contributing = await readFile(CONTRIBUTING_PATH, 'utf8');
   const output = template
     .replace(/- \$PACKAGE_LINKS/g, packageLinks.map(l => `- ${l}`).join(`\n`))
-    .replace(/\$PACKAGE_SECTIONS\n/g, packageSections.join(`\n`));
+    .replace(/\$PACKAGE_SECTIONS\n/g, packageSections.join(`\n`))
+    .replace(/\$CONTRIBUTING\n/g, contributing);
 
   await writeFile(OUTPUT_PATH, output, 'utf8');
 }
