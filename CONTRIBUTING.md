@@ -20,4 +20,4 @@ Each package has its own README. This is useful for keeping docs close to code, 
 
 **The root README is generated using a script. Do not edit it by hand.** It's assembled from a [template](scripts/templates/README.md), individual package docs and the CONTRIBUTING.md.
 
-Run `npm generate-readme` when you want to update the root README.
+Run `npm generate-readme` to update the root README.
