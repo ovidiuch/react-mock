@@ -1,6 +1,6 @@
 {
   "name": "@react-mock/xhr",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Mock XHR requests declaratively",
   "main": "dist/index.js",
   "repository": "https://github.com/skidding/react-mock",

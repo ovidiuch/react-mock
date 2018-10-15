@@ -1,6 +1,6 @@
 {
   "name": "@react-mock/localstorage",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Mock LocalStorage data declaratively",
   "main": "dist/index.js",
   "repository": "https://github.com/skidding/react-mock",
