@@ -34,8 +34,4 @@ To overcome these drawbacks, `react-mock` offers mocking techniques as declarati
 
 $PACKAGE_SECTIONS
 
-## How to contribute
-
-_TODO_
-
-![New package](new-package.png)
+$CONTRIBUTING
