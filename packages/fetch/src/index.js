@@ -33,7 +33,8 @@ export class FetchMock extends Component<Props> {
     // the previous ones
     this.unmock();
 
-    const { options, config } = this.props;
+    const { props } = this;
+    const { config } = props;
 
     if (config) {
       Object.keys(config).forEach(key => {
@@ -41,10 +42,16 @@ export class FetchMock extends Component<Props> {
       });
     }
 
-    if (this.props.matcher && this.props.response) {
-      fetchMock.mock(this.props.matcher, this.props.response, options);
-    } else {
-      fetchMock.mock(options);
+    if (props.mocks) {
+      props.mocks.forEach(options => {
+        fetchMock.mock(options);
+      });
+    } else if (props.matcher) {
+      fetchMock.mock(props.matcher, props.response, props.options);
+    } else if (props.options) {
+      // NOTE: We shouldn't check `props.options` at this point, but for some
+      // reason Flow doesn't get it.
+      fetchMock.mock(props.options);
     }
 
     fetchMock.__fetchMockInst = this;
