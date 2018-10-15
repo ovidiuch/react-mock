@@ -22,19 +22,19 @@ type SharedProps = {|
   config?: {}
 |};
 
-export type SingleShorthandProps = {|
+type SingleShorthandProps = {|
   ...SharedProps,
   matcher: FetchMatcher,
   response: FetchResponse,
   options?: {}
 |};
 
-export type SingleExplicitProps = {|
+type SingleExplicitProps = {|
   ...SharedProps,
   options: RequiredOptions
 |};
 
-export type MultiMockProps = {|
+type MultiMockProps = {|
   ...SharedProps,
   mocks: RequiredOptions[]
 |};
