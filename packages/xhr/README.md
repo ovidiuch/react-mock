@@ -24,3 +24,20 @@ render(
   </XhrMock>
 );
 ```
+
+### Multiple mocks
+
+```js
+const res = body => (req, res) => res.body(JSON.stringify(body));
+
+render(
+  <XhrMock
+    mocks={[
+      { url: '/users', response: res([{ id: 123 }]) },
+      { url: '/user/123', response: res({ name: 'Jessica' }) }
+    ]}
+  >
+    <MyComponent />
+  </XhrMock>
+);
+```

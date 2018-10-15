@@ -1,10 +1,10 @@
 // @flow
-/* global fetch */
 
 import React, { Component } from 'react';
 import { create } from 'react-test-renderer';
 import retry from '@skidding/async-retry';
-import { FetchMock } from '..';
+import { request } from '../../testHelpers/request';
+import { XhrMock } from '..';
 
 class MyComponent extends Component<{}, { name: null | string }> {
   state = {
@@ -12,8 +12,10 @@ class MyComponent extends Component<{}, { name: null | string }> {
   };
 
   async componentDidMount() {
-    const users = await (await fetch('/users')).json();
-    const { name } = await (await fetch(`/user/${users[0].id}`)).json();
+    const users = JSON.parse((await request('/users')).responseText);
+    const { name } = JSON.parse(
+      (await request(`/user/${users[0].id}`)).responseText
+    );
 
     this.setState({
       name
@@ -26,15 +28,17 @@ class MyComponent extends Component<{}, { name: null | string }> {
 }
 
 it('mocks multi GET responses', async () => {
+  const res = body => (req, res) => res.body(JSON.stringify(body));
+
   const renderer = create(
-    <FetchMock
+    <XhrMock
       mocks={[
-        { matcher: '/users', response: [{ id: 123 }] },
-        { matcher: '/user/123', response: { name: 'Jessica' } }
+        { url: '/users', response: res([{ id: 123 }]) },
+        { url: '/user/123', response: res({ name: 'Jessica' }) }
       ]}
     >
       <MyComponent />
-    </FetchMock>
+    </XhrMock>
   );
 
   await retry(() => {

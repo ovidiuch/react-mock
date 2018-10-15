@@ -6,10 +6,6 @@ import xhrMock from 'xhr-mock';
 import type { Props } from './index.js.flow';
 
 export class XhrMock extends Component<Props> {
-  static defaultProps = {
-    method: 'GET'
-  };
-
   constructor(props: Props) {
     super(props);
 
@@ -44,10 +40,15 @@ export class XhrMock extends Component<Props> {
     // the previous ones
     this.unmock();
 
-    const { method, url, response } = this.props;
-
     xhrMock.setup();
-    xhrMock.use(method, url, response);
+
+    if (this.props.mocks) {
+      this.props.mocks.forEach(options => {
+        mockSingle(options);
+      });
+    } else {
+      mockSingle(this.props);
+    }
 
     xhrMock.__xhrMockInst = this;
   }
@@ -55,4 +56,8 @@ export class XhrMock extends Component<Props> {
   unmock() {
     xhrMock.teardown();
   }
+}
+
+function mockSingle({ method = 'GET', url, response }) {
+  xhrMock.use(method, url, response);
 }
