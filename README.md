@@ -27,7 +27,7 @@ Tools like [fetch-mock](http://www.wheresrhys.co.uk/fetch-mock/) and [xhr-mock](
 
 2. They're difficult to integrate in component explorers where a usage file is a declarative component element.
 
-To overcome these drawbacks, `react-mock` offers mocking techniques as declarative [React elements](https://reactjs.org/docs/rendering-elements.html).
+To overcome these drawbacks, `react-mock` offers mocking techniques as declarative [React elements](https://reactjs.org/docs/rendering-elements.html). Lifecycle methods take care of setting up and reverting mocks behind the hood.
 
 ### Limitations
 
@@ -77,9 +77,26 @@ render(
 );
 ```
 
-Check how fetch was called using fetch-mock's [inspection methods](http://www.wheresrhys.co.uk/fetch-mock/#api-inspectionfiltering).
+### Multiple mocks
 
-> **Note:** Import _fetchMock_ from `@react-mock/fetch` to ensure you're inspecting on the right fetch-mock instance.
+```js
+render(
+  <FetchMock
+    mocks={[
+      { matcher: '/users', response: [{ id: 123 }] },
+      { matcher: '/user/123', response: { name: 'Jessica' } }
+    ]}
+  >
+    <MyComponent />
+  </FetchMock>
+);
+```
+
+### Inspection
+
+See fetch-mock's [inspection methods](http://www.wheresrhys.co.uk/fetch-mock/#api-inspectionfiltering) to check how fetch was called.
+
+> **Note:** Import `fetchMock` from @react-mock/fetch to ensure you're inspecting on the right fetch-mock instance.
 
 ```js
 import { fetchMock } from '@react-mock/fetch';
@@ -126,6 +143,23 @@ render(
 // POST
 render(
   <XhrMock url="/login" method="POST" response={(req, res) => res.status(401)}>
+    <MyComponent />
+  </XhrMock>
+);
+```
+
+### Multiple mocks
+
+```js
+const res = body => (req, res) => res.body(JSON.stringify(body));
+
+render(
+  <XhrMock
+    mocks={[
+      { url: '/users', response: res([{ id: 123 }]) },
+      { url: '/user/123', response: res({ name: 'Jessica' }) }
+    ]}
+  >
     <MyComponent />
   </XhrMock>
 );
