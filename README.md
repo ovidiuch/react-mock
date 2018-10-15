@@ -183,8 +183,12 @@ Run `yarn new-package` and you'll follow this friendly flow that will generate i
 
 ### Docs
 
-Each package has their own README. This is useful for keeping docs close to code, as well as for showing docs on each package's npm page.
+Each package has its own README. This is useful for keeping docs close to code, as well as for showing docs on each package's npm page.
 
 **The root README is generated using a script. Do not edit it by hand.** It's assembled from a [template](scripts/templates/README.md), individual package docs and the CONTRIBUTING.md.
 
 Run `npm generate-readme` when you want to update the root README.
+
+## License
+
+MIT © [Ovidiu Cherecheș](https://ovidiu.ch)
