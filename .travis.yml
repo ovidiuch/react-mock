@@ -16,5 +16,3 @@ script:
 after_success:
   # Report coverage
   - yarn codecov
-cache:
-  yarn: true
