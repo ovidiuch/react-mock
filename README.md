@@ -1,4 +1,4 @@
-# `react-mock`
+# React mock
 
 [![Build](https://travis-ci.com/skidding/react-mock.svg?branch=master)](https://travis-ci.com/skidding/react-mock) [![Coverage](https://codecov.io/gh/skidding/react-mock/branch/master/graph/badge.svg)](https://codecov.io/gh/skidding/react-mock)
 
@@ -15,7 +15,7 @@ Declarative mocks for React state and global APIs.
 
 ## Why?
 
-The motivation for this project comes from wanting to load any type of React component in isolation—inside automated tests as well as in component explorers such as [Cosmos](https://github.com/react-cosmos/react-cosmos) or [Storybook](https://github.com/storybooks/storybook). Some components as stateful, while others fetch data or interact with some other external input.
+The motivation for this project comes from wanting to load any type of React component in isolation—inside automated tests as well as in component explorers such as [Cosmos](https://github.com/react-cosmos/react-cosmos) or [Storybook](https://github.com/storybooks/storybook). Some components are stateful, while others fetch data or interact with some other external input.
 
 The aim here is to isolate _all_ components, not just presentational and stateless components.
 
