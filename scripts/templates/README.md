@@ -1,4 +1,4 @@
-# `react-mock`
+# React mock
 
 [![Build](https://travis-ci.com/skidding/react-mock.svg?branch=master)](https://travis-ci.com/skidding/react-mock) [![Coverage](https://codecov.io/gh/skidding/react-mock/branch/master/graph/badge.svg)](https://codecov.io/gh/skidding/react-mock)
 
@@ -25,6 +25,24 @@ Tools like [fetch-mock](http://www.wheresrhys.co.uk/fetch-mock/) and [xhr-mock](
 2. They're difficult to integrate in component explorers where a usage file is a declarative component element.
 
 To overcome these drawbacks, `react-mock` offers mocking techniques as declarative [React elements](https://reactjs.org/docs/rendering-elements.html). Lifecycle methods take care of setting up and reverting mocks behind the hood.
+
+### Composition
+
+Two or more mocks can be composed into a single React element.
+
+```js
+render(
+  <LocalStorageMock items={{ userId: 123 }}>
+    <FetchMock matcher="/user/123" response={{ name: 'Jessica' }}>
+      <StateMock state={{ show: true }}>
+        <ToggleShow>
+          <UserGreeting />
+        </ToggleShow>
+      </StateMock>
+    </FetchMock>
+  </LocalStorageMock>
+);
+```
 
 ### Limitations
 

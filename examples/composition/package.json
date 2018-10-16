@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "name": "react-mocks-example-composition",
+  "version": "0.0.0",
+  "dependencies": {
+    "@react-mock/fetch": "^0.3.0",
+    "@react-mock/localstorage": "^0.1.2",
+    "@react-mock/state": "^0.1.6",
+    "lodash": "^4.17.11"
+  }
+}
