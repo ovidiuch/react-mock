@@ -69,6 +69,8 @@ render(
 );
 ```
 
+> **Warning:** StateMock delays ref calls. This means refs can get called _after_ componentDidMount, instead of before as you [might expect](https://stackoverflow.com/questions/44074747/componentdidmount-called-before-ref-callback).
+
 ## Fetch requests
 
 A declarative wrapper for the wonderful [fetch-mock](http://www.wheresrhys.co.uk/fetch-mock/).
