@@ -52,6 +52,7 @@ async function getTargetPackages() {
 async function build({ pkg, watch }) {
   await clearBuild(pkg);
   await copyFlowDefs(pkg);
+  await copyTsDefs(pkg);
 
   const pkgLabel = `@react-mock/${bold(pkg)}`;
   await run({
@@ -68,6 +69,13 @@ async function clearBuild(pkg: string) {
 
 async function copyFlowDefs(pkg) {
   return cpy('**/*.js.flow', '../dist', {
+    cwd: join(ROOT_PATH, `packages/${pkg}/src`),
+    parents: true
+  });
+}
+
+async function copyTsDefs(pkg) {
+  return cpy('**/*.d.ts', '../dist', {
     cwd: join(ROOT_PATH, `packages/${pkg}/src`),
     parents: true
   });
