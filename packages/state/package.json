@@ -1,6 +1,6 @@
 {
   "name": "@react-mock/state",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Inject React component state declaratively",
   "main": "dist/index.js",
   "repository": "https://github.com/skidding/react-mock",
